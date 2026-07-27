@@ -1,0 +1,83 @@
+api:
+  host: 127.0.0.1
+  inference_history_db: /Users/vasu/realtime-stock-forecasting-inference-history.db
+  port: 8000
+  stream_interval_seconds: 1.0
+  allowed_horizons:
+  - 30m
+  - 1h
+  default_horizon: 30m
+  horizon_minutes:
+    30m: 30
+    1h: 60
+backtest:
+  initial_capital: 100000.0
+  risk_free_rate: 0.02
+  signal_threshold_buy: 0.010
+  signal_threshold_sell: 0.009
+  slippage_pct: 0.0002
+  transaction_cost_pct: 0.0005
+data:
+  cache_dir: /Users/vasu/realtime-stock-forecasting-datacache
+  end_date: 'today'
+  forecast_horizon: 5
+  resolution: 1d
+  sector_etfs:
+  - SPY
+  - QQQ
+  - XLF
+  sequence_length: 30
+  start_date: '2019-01-01'
+  target_col: target_return
+  tickers:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - AMZN
+  - META
+features:
+  bollinger_period: 20
+  bollinger_std: 2
+  macd_fast: 12
+  macd_signal: 9
+  macd_slow: 26
+  regime_volatility_window: 20
+  rolling_windows:
+  - 5
+  - 10
+  - 20
+  rsi_period: 14
+  scaler_type: robust
+model:
+  cnn_lstm:
+    conv_filters: 64
+    dropout: 0.2
+    kernel_size: 3
+    lstm_hidden_dim: 128
+  gru:
+    dropout: 0.2
+    hidden_dim: 128
+    num_layers: 2
+  lstm:
+    dropout: 0.2
+    hidden_dim: 128
+    num_layers: 2
+  tft:
+    dropout: 0.2329773532584502
+    hidden_dim: 64
+    num_heads: 4
+    num_layers: 2
+    quantiles:
+    - 0.1
+    - 0.5
+    - 0.9
+training:
+  batch_size: 64
+  device: cpu
+  early_stopping_patience: 10
+  epochs: 1
+  learning_rate: 0.004284536032202181
+  mixed_precision: false
+  random_seed: 42
+  save_dir: /Users/vasu/realtime-stock-forecasting-checkpoints
+  weight_decay: 0.00029756147096157953
